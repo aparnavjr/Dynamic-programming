@@ -1,0 +1,26 @@
+public class Solution {
+    public int CoinChange(int[] coins, int amount) {
+        
+        if(amount == 0)
+            return 0;
+            
+        if(coins.Length == 0)
+            return -1;
+            
+        int[] total = new int[amount+1];
+        
+        for(int i = 1; i<= amount;i++)
+        {
+            int min = Int16.MaxValue;
+            for(int j = 0 ; j< coins.Length;j++)
+            {
+                if(i >= coins[j] && total[i-coins[j]] != -1)
+                    min = Math.Min(min, total[i - coins[j]] + 1);
+            }
+            
+            total[i] = min == Int16.MaxValue ? -1 : min;
+        }
+        
+        return total[amount];
+    }
+}
