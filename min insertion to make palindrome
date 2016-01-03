@@ -1,0 +1,30 @@
+public void Main()
+{
+  string s = "geeks";
+  Console.WriteLine(minInsertions(s));
+  
+}
+
+public static int minInsertions(string s)
+{
+  
+  int[,] table = new int[s.Length,s.Length];
+  
+  for(int i = 0; i < s.Length ;i++)
+    for(int j = 0; j < s.Length;j++)
+  {
+    table[i,j] =0;
+  }
+  
+  for(int gap =1 ;gap <s.Length;gap++)
+    for(int l=0,h=gap;h<s.Length;l++,h++)
+  {
+    
+    table[l,h] = s[l] == s[h] ? table[l+1,h-1]:Math.Min(table[l+1,h],table[l,h-1]) +1;
+  }
+  
+  return table[0,s.Length-1];
+  
+}
+
+//Any classes if required
